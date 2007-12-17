@@ -13,7 +13,6 @@ Release:	%{release}
 License:	GPL
 Group:		Games/Other
 URL:		http://ggzgamingzone.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source:		http://download.sf.net/ggz/%{name}-%{version}.tar.bz2
 BuildRequires:	libggz-devel = %{libggz_version}
 BuildRequires:	ggz-client-libs-devel = %{ggz_client_libs_version}
