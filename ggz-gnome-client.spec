@@ -51,15 +51,19 @@ desktop-file-install --vendor="" \
 
 %find_lang ggz-gnome
 
+%if %mdkversion < 200900
 %post
 %update_menus
 %post_install_gconf_schemas ggz-gnome
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas ggz-gnome
 
+%if %mdkversion < 200900
 %postun
 %clean_menus
+%endif
 
 %clean
 rm -rf %{buildroot}
