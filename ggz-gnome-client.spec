@@ -1,6 +1,6 @@
 %define name	ggz-gnome-client
 %define version 0.0.14.1
-%define release %mkrel 1
+%define release %mkrel 3
 
 %define libggz_version %{version}
 
