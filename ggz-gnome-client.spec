@@ -1,19 +1,13 @@
-%define name	ggz-gnome-client
-%define version 0.0.14.1
-%define release %mkrel 6
-
 %define libggz_version %{version}
-
 %define ggz_client_libs_version %{version}
 
-Name:		%{name}
+Name:		ggz-gnome-client
 Summary:	GGZ Client for Gnome Desktop
-Version:	%{version}
-Release:	%{release}
+Version:	0.0.14.1
+Release:	7
 License:	GPL
 Group:		Games/Other
 URL:		http://ggzgamingzone.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source:		http://download.sf.net/ggz/%{name}-%{version}.tar.bz2
 BuildRequires:	libggz-devel = %{libggz_version}
 BuildRequires:	ggz-client-libs-devel = %{ggz_client_libs_version}
@@ -29,6 +23,7 @@ The official GGZ Gaming Zone client for Gnome Desktop.
 %setup -q
 
 %build
+export LDFLAGS="-lX11"
 %configure2_5x \
 	--bindir=%{_gamesbindir} \
 	--datadir="\${prefix}/share" \
@@ -39,7 +34,6 @@ The official GGZ Gaming Zone client for Gnome Desktop.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 desktop-file-install --vendor="" \
@@ -49,26 +43,10 @@ desktop-file-install --vendor="" \
   --add-category="Game" \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
 
-%find_lang ggz-gnome
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%post_install_gconf_schemas ggz-gnome
-%endif
-
 %preun
 %preun_uninstall_gconf_schemas ggz-gnome
 
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%endif
-
-%clean
-rm -rf %{buildroot}
-
-%files -f ggz-gnome.lang
+%files
 %defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog INSTALL NEWS README README.GGZ
 %{_sysconfdir}/gconf/schemas/ggz-gnome.schemas
@@ -79,4 +57,46 @@ rm -rf %{buildroot}
 %{_datadir}/locale/*
 %{_mandir}/man?/*
 
+
+
+
+%changelog
+* Mon May 23 2011 Funda Wang <fwang@mandriva.org> 0.0.14.1-6mdv2011.0
++ Revision: 677703
+- rebuild to add gconftool as req
+
+* Thu Dec 09 2010 Oden Eriksson <oeriksson@mandriva.com> 0.0.14.1-5mdv2011.0
++ Revision: 618452
+- the mass rebuild of 2010.0 packages
+
+* Fri Sep 04 2009 Thierry Vignaud <tv@mandriva.org> 0.0.14.1-4mdv2010.0
++ Revision: 429198
+- rebuild
+
+* Thu Jul 24 2008 Thierry Vignaud <tv@mandriva.org> 0.0.14.1-3mdv2009.0
++ Revision: 245996
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+* Tue Feb 26 2008 Emmanuel Andry <eandry@mandriva.org> 0.0.14.1-1mdv2008.1
++ Revision: 175549
+- New version
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Sun Sep 16 2007 Emmanuel Andry <eandry@mandriva.org> 0.0.14-2mdv2008.0
++ Revision: 88668
+- drop old menu
+
+
+* Sat Feb 10 2007 Emmanuel Andry <eandry@mandriva.org> 0.0.14-1mdv2007.0
++ Revision: 118768
+- Buildrequires libgnomeui2-devel
+- Import ggz-gnome-client
 
