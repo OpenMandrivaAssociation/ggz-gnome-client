@@ -4,7 +4,7 @@
 Name:		ggz-gnome-client
 Summary:	GGZ Client for Gnome Desktop
 Version:	0.0.14.1
-Release:	7
+Release:	8
 License:	GPL
 Group:		Games/Other
 URL:		http://ggzgamingzone.org/
