@@ -9,6 +9,11 @@ License:	GPL
 Group:		Games/Other
 URL:		https://ggzgamingzone.org/
 Source:		http://download.sf.net/ggz/%{name}-%{version}.tar.bz2
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libggz-devel = %{libggz_version}
 BuildRequires:	ggz-client-libs-devel = %{ggz_client_libs_version}
 BuildRequires:	desktop-file-utils 
